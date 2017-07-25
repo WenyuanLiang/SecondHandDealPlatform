@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-18 19:08:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xyz.domain.XyzType" table="xyz_type" catalog="xyz">
+        <id name="typeName" type="string">
+            <column name="type_name" />
+            <generator class="assigned" />
+        </id>
+        <set name="xyzGoodses" table="xyz_goods" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="goods_type" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.domain.XyzGoods" />
+        </set>
+    </class>
+</hibernate-mapping>

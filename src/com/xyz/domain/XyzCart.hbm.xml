@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-18 19:08:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xyz.domain.XyzCart" table="xyz_cart" catalog="xyz">
+        <composite-id name="id" class="com.xyz.domain.XyzCartId">
+            <key-property name="cartGoodsId" type="int">
+                <column name="cart_goods_id" />
+            </key-property>
+            <key-property name="cartBuyerId" type="int">
+                <column name="cart_buyer_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="xyzUser" class="com.xyz.domain.XyzUser" update="false" insert="false" fetch="select">
+            <column name="cart_buyer_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="xyzGoods" class="com.xyz.domain.XyzGoods" update="false" insert="false" fetch="select">
+            <column name="cart_goods_id" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

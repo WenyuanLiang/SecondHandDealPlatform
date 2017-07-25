@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-18 19:08:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xyz.domain.XyzUser" table="xyz_user" catalog="xyz">
+        <id name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+            <generator class="identity" />
+        </id>
+        <property name="userName" type="string">
+            <column name="user_name" length="20" not-null="true" />
+        </property>
+        <property name="userPassword" type="string">
+            <column name="user_password" length="20" not-null="true" />
+        </property>
+        <property name="userCelphone" type="string">
+            <column name="user_celphone" length="20" not-null="true" />
+        </property>
+        <property name="userAddress" type="string">
+            <column name="user_address" length="30" not-null="true" />
+        </property>
+        <set name="xyzOrdersForOrderSellerId" table="xyz_order" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="order_seller_id" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.domain.XyzOrder" />
+        </set>
+        <set name="xyzGoodses" table="xyz_goods" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="goods_user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.domain.XyzGoods" />
+        </set>
+        <set name="xyzCommentses" table="xyz_comments" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="comments_seller_id" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.domain.XyzComments" />
+        </set>
+        <set name="xyzCarts" table="xyz_cart" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="cart_buyer_id" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.domain.XyzCart" />
+        </set>
+        <set name="xyzOrdersForOrderBuyerId" table="xyz_order" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="order_buyer_id" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.domain.XyzOrder" />
+        </set>
+    </class>
+</hibernate-mapping>

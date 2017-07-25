@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="default" namespace="/" extends="struts-default">
+    	 <interceptors>
+		<interceptor name="my" class="com.xyz.interceptor.MyInterceptor">
+		</interceptor>
+		<interceptor name="showInterceptor" class="com.xyz.interceptor.showInterceptor">
+		<param name="includeMethods">showMyGoods,showMyBought,showMySold,showMyCart,deleteMyGoods,addMyGoods</param>
+		</interceptor>
+		<interceptor name="addInterceptor" class="com.xyz.interceptor.addInterceptor">
+		<param name="includeMethods">addToCartByCart,addToCartByUserAndGoods,deleteFromCart,buyNowById,jmp</param>
+		</interceptor>
+		<interceptor name="loginInterceptor" class="com.xyz.interceptor.loginInterceptor">
+		<param name="includeMethods">login</param>
+		</interceptor>
+		<interceptor-stack name="myStack">
+		<interceptor-ref name="loginInterceptor"></interceptor-ref>
+		<interceptor-ref name="addInterceptor"></interceptor-ref>
+		<interceptor-ref name="showInterceptor"></interceptor-ref>
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+		
+		</interceptor-stack>
+		
+		</interceptors>
+    	
+    	<action name="showMyInformationAction" class="com.xyz.action.PersonAction" method="findUserById">
+  			<result name="loaded">personalinformation.jsp</result> 
+  		</action>
+    	<action name="*Action" class="com.xyz.action.PersonAction" method="{1}">
+			<result name="showMyCartloaded">showMyCart.jsp</result> 
+			<result name="showMyGoodsloaded">showMyGoods.jsp</result> 
+			<result name="showMyBoughtloaded">showMyBought.jsp</result> 
+			<result name="showMySoldloaded">showMySold.jsp</result> 
+			<result name="mycartdeleted" type="redirectAction">showMyCartAction</result>
+			<result name="mygoodsdeleted" type="redirectAction">showMyGoodsAction</result>
+			<result name="mygoodsadded" type="redirectAction">showMyGoodsAction</result>
+			<result name="checkedout">index.jsp</result> 
+			<result name="loginfirst">login.jsp</result>
+			
+			<interceptor-ref name="myStack"></interceptor-ref>
+			
+ 		</action>
+    	
+    
+    	<action name="goodsSearchBy*" class="com.xyz.action.XyzGoodsAction" method="findGoodsBy{1}">
+    		<result name="findgoodsbyid">goodsList.jsp</result>
+    		<result name="findgoodsbyname">goodsList.jsp</result>
+    		<result name="findgoodsbytype">collections.jsp</result>
+    		<result name="findgoodsbyuser">collections.jsp</result>
+    		<interceptor-ref name="myStack"></interceptor-ref>
+    		
+    	</action>
+    	<action name="findAllGoods" class="com.xyz.action.XyzGoodsAction" method="findAllGoods">
+    		<result name="findallgoods">index.jsp</result>
+    		<interceptor-ref name="myStack"></interceptor-ref>
+    		
+    	</action>
+    	<action name="findCollection" class="com.xyz.action.XyzGoodsAction" method="findCollection">
+    		<result name="findcollection">index.jsp</result>
+    		<interceptor-ref name="myStack"></interceptor-ref>
+    		
+    	</action>
+    	
+    	
+    	<action name="login" class="com.xyz.action.LoginAction" method="login">
+    		<result name="login">index.jsp</result>
+    		<result name="loginfail">login.jsp</result>
+    		<result name="loginfirst">login.jsp</result>
+    		<result name="loginalready">login.jsp</result>
+    		<interceptor-ref name="myStack"></interceptor-ref>
+    		
+    	</action>
+    	<action name="register" class="com.xyz.action.LoginAction" method="register">
+    		<result name="register">login.jsp</result>
+    		<result name="registerfail">register.jsp</result>
+    		<interceptor-ref name="myStack"></interceptor-ref>
+    		
+    	</action>
+    	<action name="quit" class="com.xyz.action.LoginAction" method="quit">
+    		<result name="quit">index.jsp</result>
+    		<interceptor-ref name="myStack"></interceptor-ref>
+    		
+    	</action>
+    	
+    	<action name="infochange" class="com.xyz.action.LoginAction" method="infochange">
+    		<result name="infochange">index.jsp</result>
+    	</action>
+    	
+    	<action name="addToCartByCart" class="com.xyz.action.XyzCartAction" method="addToCartByCart">
+    		<result name="addtocartbycart">collections.jsp</result>
+    		<result name="loginfirst">login.jsp</result>
+    		
+    		<interceptor-ref name="myStack"></interceptor-ref>
+    		
+    	</action>
+    	<action name="addToCartByUserAndGoods" class="com.xyz.action.XyzCartAction" method="addToCartByUserAndGoods">
+    		<result name="addtocartbyuserandgoods">showMyCart.jsp</result>
+    		<result name="addtocartbyuserandgoodsfail">showMyCart.jsp</result>
+    		<result name="loginfirst">login.jsp</result>
+    		
+    		<interceptor-ref name="myStack"></interceptor-ref>
+    		
+    	</action>
+    	<action name="getInfoOfGoods" class="com.xyz.action.XyzGoodsAction" method="findGoodsById">
+    		<result name="findgoodsbyid">goods_detail.jsp</result>
+    	
+    		
+    	</action>
+    	
+    	<action name="showGoodsByIdAction" class="com.xyz.action.XyzGoodsAction" method="findGoodsById">
+		  	<result name="goodsbyidfound">goods_detail.jsp</result> 
+		  
+		  	
+		</action>
+	
+		
+    	<action name="buyNowAction" class="com.xyz.action.XyzCartAction" method="buyNowById">
+    		<result name="success">index.jsp</result>
+    		<result name="loginfirst">login.jsp</result>
+    		<interceptor-ref name="myStack"></interceptor-ref>
+    		
+    	</action>
+    	
+    </package>
+
+</struts>

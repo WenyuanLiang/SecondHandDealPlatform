@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-18 19:08:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xyz.domain.XyzGoods" table="xyz_goods" catalog="xyz">
+        <id name="goodsId" type="java.lang.Integer">
+            <column name="goods_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="xyzUser" class="com.xyz.domain.XyzUser" lazy="false" fetch="select">
+            <column name="goods_user_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="xyzType" class="com.xyz.domain.XyzType" fetch="select">
+            <column name="goods_type" not-null="true" />
+        </many-to-one>
+        <property name="goodsName" type="string">
+            <column name="goods_name" length="50" not-null="true" />
+        </property>
+        <property name="goodsStatus" type="int">
+            <column name="goods_status" not-null="true" />
+        </property>
+        <property name="goodsPrice" type="long">
+            <column name="goods_price" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="goodsDescription" type="string">
+            <column name="goods_description" length="65535" />
+        </property>
+        <property name="goodsPicture1" type="string">
+            <column name="goods_picture1" length="200" not-null="true" />
+        </property>
+        <property name="goodsPictrue2" type="string">
+            <column name="goods_pictrue2" length="200" />
+        </property>
+        <property name="goodsPicture3" type="string">
+            <column name="goods_picture3" length="200" />
+        </property>
+        <set name="xyzOrders" table="xyz_order" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="order_goods_id" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.domain.XyzOrder" />
+        </set>
+        <set name="xyzCarts" table="xyz_cart" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="cart_goods_id" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.domain.XyzCart" />
+        </set>
+    </class>
+</hibernate-mapping>

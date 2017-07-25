@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-18 19:08:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xyz.domain.XyzOrder" table="xyz_order" catalog="xyz">
+        <id name="orderId" type="java.lang.Long">
+            <column name="order_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="xyzGoods" class="com.xyz.domain.XyzGoods" fetch="select">
+            <column name="order_goods_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="xyzUserByOrderSellerId" class="com.xyz.domain.XyzUser" fetch="select">
+            <column name="order_seller_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="xyzUserByOrderBuyerId" class="com.xyz.domain.XyzUser" fetch="select">
+            <column name="order_buyer_id" not-null="true" />
+        </many-to-one>
+        <property name="orderTime" type="timestamp">
+            <column name="order_time" length="19" not-null="true" />
+        </property>
+        <property name="orderIscomplete" type="int">
+            <column name="order_iscomplete" not-null="true" />
+        </property>
+        <property name="orderShow" type="int">
+            <column name="order_show" not-null="true" />
+        </property>
+        <property name="orderAddress" type="string">
+            <column name="order_address" not-null="true" />
+        </property>
+        <property name="orderCelphone" type="string">
+            <column name="order_celphone" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
