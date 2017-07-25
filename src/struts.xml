@@ -45,7 +45,9 @@
 			<interceptor-ref name="myStack"></interceptor-ref>
 			
  		</action>
-    	
+    	<action name="addMyGoodsAction" class="com.xyz.action.PersonAction" method="addMyGoods">
+    		<result name="mygoodsadded" type="redirectAction">showMyGoodsAction</result>
+    	</action>
     
     	<action name="goodsSearchBy*" class="com.xyz.action.XyzGoodsAction" method="findGoodsBy{1}">
     		<result name="findgoodsbyid">goodsList.jsp</result>

@@ -134,9 +134,8 @@
 		<a href="showMyGoodsAction">我上传的商品</a>/上架新商品 </div>
 		 <fieldset>
 		<div class="form-horizontal content-center">
-		<form action="addMyGoodsAction" class="com.xyz.action.PersonAction" method="post" 
-		onsubmit="return myfun_submit()">
-		        <input type="hidden" class="form-control" name="xyzUser"  value=${sessionScope.user} }><br>
+		<form action="addMyGoodsAction" class="com.xyz.action.PersonAction" method="post" onsubmit="return myfun_submit()">
+		        <%-- <input type="hidden" class="form-control" name="xyzUser"  value=${sessionScope.user }><br> --%>
 				<div class="form-group">
 				<label for="inputEmail3" class="col-sm-4 control-label">商品名称</label>
 				<div class="col-sm-8">
@@ -177,7 +176,7 @@
 				<div class="form-group">
 				<label for="inputEmail3" class="col-sm-4 control-label">商品分类</label>
 				<div class="col-sm-8">
-					<select class="form-control" >
+					<select class="form-control" name="type">
 					<option>影音家电</option>
 					<option>家居日用</option>
 					<option>闲置数码</option>

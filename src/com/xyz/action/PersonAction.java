@@ -31,7 +31,15 @@ public class PersonAction extends ActionSupport implements ModelDriven<XyzGoods>
 	}
 	private String address;
 	private String celphone;
+	private String type;
 	private XyzGoods mygoods = new XyzGoods();
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String findUserById(int userid) {
 	XyzUser user = personService.findUserById(userid);
 	ServletActionContext.getRequest().setAttribute("user",user);
@@ -79,11 +87,13 @@ public String deleteMyGoods() {
 	return "mygoodsdeleted";
 	}
 public String addMyGoods() {
+	System.out.println("222");
 	XyzUser user = (XyzUser) ServletActionContext.getRequest().getSession().getAttribute("user");
 	mygoods.setXyzUser(personService.findUserById(user.getUserId()));
-	XyzType type = new XyzType();
-	type.setTypeName("º“æ”»’”√");
-	mygoods.setXyzType(type);
+	XyzType type1 = new XyzType();
+	type1.setTypeName(type);
+	mygoods.setGoodsStatus(1);
+	mygoods.setXyzType(type1);
 	personService.addgoods(mygoods);
 	return "mygoodsadded";
 	}

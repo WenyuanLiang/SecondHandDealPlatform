@@ -68,6 +68,7 @@ public class LoginAction extends ActionSupport implements ModelDriven<XyzUser>{
 		XyzUser user1 = (XyzUser) ServletActionContext.getRequest().getSession().getAttribute("user");
 		user.setUserId(user1.getUserId());
 		userService.infochange(user);
+		ServletActionContext.getRequest().getSession().setAttribute("user", user);
 		return "infochange";
 	}
 }
